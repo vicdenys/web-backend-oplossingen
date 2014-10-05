@@ -9,7 +9,7 @@
 		<title></title>
 		<meta charset="utf-8"/>
 		<style>
-			.odd{
+			.even{
 				background-color: green;
 			}
 		</style>
@@ -24,7 +24,7 @@
 			<tr>
 				<?php $product = 1?>
 				<?php while ($product <= 10): ?>
-					<td class="<?= ( ( $tafel * $product ) % 2 > 0 ) ? : 'odd' ?>"><?=$product * $tafel?></td>
+					<td class="<?= ( ( $tafel * $product ) % 2 > 0 ) ? : 'even' ?>"><?=$product * $tafel?></td>
 					<?php $product++;?>
 				<?php endwhile?>
 			</tr>
