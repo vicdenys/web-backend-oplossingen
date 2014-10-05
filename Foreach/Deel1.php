@@ -5,19 +5,7 @@
 	rsort($textChars);
 	$reverseChars = array_reverse($textChars);
 	
-	$aantal = array();
-	foreach($reverseChars as $value)
-	{
-		if ( isset ( $aantal[ $value ] ) )
-		{
-			++$aantal[ $value ];
-		}
-		else
-		{
-			$aantal[ $value ] = 1;
-		}
-		
-	}
+	$aantal = array_count_values($reverseChars);
 ?>
 
 <!DOCTYPE html>
