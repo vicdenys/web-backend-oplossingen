@@ -5,7 +5,16 @@
 	rsort($textChars);
 	$reverseChars = array_reverse($textChars);
 	
-	$aantal = array_count_values($reverseChars);
+	$aantalkeer = array();
+	foreach($reverseChars as $value){
+		if (array_key_exists($value, $aantalkeer)){
+			$aantalkeer[$value] += 1;
+		}
+		else
+		{
+			$aantalkeer[$value] = 1;
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +26,6 @@
 	</head>
 	<body>
 		<h1>Oplossing foreach deel 1</h1>
-		<pre><?=var_dump($aantal)?></pre>
+		<pre><?=var_dump($aantalkeer)?></pre>
 	</body>
 </html>
