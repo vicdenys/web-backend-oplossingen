@@ -1,0 +1,24 @@
+body{;
+	font-family: Helvetica;
+}
+
+img{
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+article{
+	width: 300px;
+	display: inline-block;
+	margin-right: 30px;
+	background-color: #e6e5e5;
+	padding: 10px;
+	height: 450px;
+	position: relative;
+	margin-top: 50px;
+}
+h2{
+	height: 100px;
+}
