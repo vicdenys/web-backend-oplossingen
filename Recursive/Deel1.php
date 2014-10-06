@@ -13,7 +13,7 @@
 		if ($aantalJaren == 0){return false;}
 		else{
 			$winst = $bedrag / 100 * $procent;
-			$totaal += $bedrag + $winst;
+			$totaal = $bedrag + $winst;
 			$antwoord[] = 'Na ' . $jaargang . ' jaar bedraagt het totaal bedrag  €' . floor($totaal) . ' en is de winst van dat jaar €' . floor($winst);
 			$aantalJaren--;
 			$jaargang++;
