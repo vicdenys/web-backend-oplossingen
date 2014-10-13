@@ -23,6 +23,20 @@ Uitzonderlijk kreeg de wachtende pers toch Bart De Wever te zien. De N-VA-voorzi
 				
 	);
 	
+	$individueelArtikel		=	false;
+	$nietBestaandArtikel	=	false;
+	
+	if (isset($_GET['id'])){
+		$id = $_GET['id'];
+		
+		if ( array_key_exists($id , $artikels)){
+			$artikels 			= 	array( $artikels[$id] );
+			$individueelArtikel	=	true;
+		}
+		else{
+			$nietBestaandArtikel	=	true;
+		}	
+	}
 	
 	
 ?>
@@ -30,7 +44,14 @@ Uitzonderlijk kreeg de wachtende pers toch Bart De Wever te zien. De N-VA-voorzi
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<?php if ( !$individueelArtikel ): ?>
+			<title>Oplossing get: deel1</title>
+		<?php elseif ( $nietBestaandArtikel ): ?>
+			<title>Oplossing get: deel1 - Het artikel met id <?php echo $id ?> bestaat niet</title>
+		<?php else: ?>
+			<title>Oplossing get: deel1. Artikel: <?php echo $artikels[0]['titel'] ?></title>
+		<?php endif ?>
+			
 		<meta charset="utf-8"/>
 		
 		<link rel="stylesheet" type="text/css" href="style.css">
@@ -38,17 +59,26 @@ Uitzonderlijk kreeg de wachtende pers toch Bart De Wever te zien. De N-VA-voorzi
 	<body>
 		<h1>Oplossing Get</h1>
 		
-		<?php foreach ($artikels as $key => $article): ?>
-			<article>
-				<header>
-					<h2><?= $article['titel'] ?></h2>
-					<img src="img/<?=$article['afbeelding'] ?>"/>
-					<p><?= $article['datum'] ?></p>
-				</header>
-					<p><?= substr($article['inhoud'], 0, 50) . '...'; ?></p>
-					<a href="16_opdracht-get.php?id=<?= $key ?>">Lees meer</a>
+		
+		<?php if ( !$nietBestaandArtikel ): ?>
+			<div id="container">
+			<?php foreach($artikels as $key => $artikel):?>
+			<article class="<?php echo ( !$individueelArtikel ) ? 'meer': 'een' ; ?>">
+				<h3><?= $artikel['titel'] ?></h3>
+				<p class="datum"><?= $artikel['datum'] ?></p>
+				<img src="img/<?=$artikel['afbeelding']?>"/>
+				<p class="tekst"><?php echo ( !$individueelArtikel ) ? str_replace ( "\r\n", "</p><p>", substr( $artikel['inhoud'], 0, 50 ) ) . '...': str_replace ( "\r\n", "</p><p>",$artikel['inhoud'] ) ; ?></p>
+				
+				<?php if ( !$individueelArtikel ): ?>
+					<a href="home.php?id=<?php echo $key ?>">lees meer</a>
+				<?php endif ?>
 			</article>
-		<?php endforeach?>
+			<?php endforeach; ?>
+			</div>
+		<?php else: ?>
+		<p>Het artikel met id <?php echo $key ?> bestaat niet. Probeer een ander artikel.</p>
+		<?php endif ?>
+			
 	</body>
 </html>
 
