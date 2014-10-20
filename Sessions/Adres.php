@@ -11,7 +11,6 @@
 	(isset($_SESSION["Adres"]["gemeente"])) ? $gemeente = $_SESSION["Adres"]["gemeente"] : $gemeente = ""; 
 	(isset($_SESSION["Adres"]["postcode"])) ? $postcode = $_SESSION["Adres"]["postcode"] : $postcode = "";
 	
-	var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
