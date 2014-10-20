@@ -23,6 +23,7 @@
 			header("location: Deel1.php");
 		}
 	}
+	
 ?>
 
 <!DOCTYPE html>
