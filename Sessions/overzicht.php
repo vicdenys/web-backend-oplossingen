@@ -32,7 +32,7 @@
 		<ul>
 		<?php foreach($_SESSION as $h => $list) :?>
 			<?php foreach($list as $key => $value) :?>
-				<li><?=$key . ": " . $value . "	| "?><a href="<?=$h?>.php">wijzig</a> </li>
+				<li><?=$key . ": " . $value . "	| "?><a href="<?=$h?>.php?focus=<?=$key?>">wijzig</a> </li>
 			<?php endforeach?>
 		<?php endforeach?>
 		</ul>

@@ -31,11 +31,11 @@
 			<ul>
 				<li>
 					<p>e-mail:</p>
-					<input type="text" name="email" value=<?=$email?>>
+					<input type="text" name="email" value=<?=$email?> <?=(isset($_GET["focus"]) && $_GET["focus"] == "email") ? 'autofocus' :'';?>>
 				</li>
 				<li>
 					<p>nickname:</p>
-					<input type="text" name="nickname" value=<?=$nickname?>>
+					<input type="text" name="nickname" value=<?=$nickname?> <?=(isset($_GET["focus"]) && $_GET["focus"] == "nickname") ? 'autofocus' :'';?>>
 				</li>
 			</ul>
 			<input type="submit" name="submit" value="Volgende">

@@ -45,19 +45,19 @@
 			<ul>
 				<li>
 					<p>Straat</p>
-					<input type="text" name="straat" value=<?=$nummer?>>
+					<input type="text" name="straat" <?=(isset($_GET["focus"]) && $_GET["focus"] == "straat") ? 'autofocus' :'';?> value=<?=$nummer?> >
 				</li>
 				<li>
 					<p>Nummer</p>
-					<input type="number" name="nummer" value=<?=$nummer?>>
+					<input type="number" name="nummer" <?=(isset($_GET["focus"]) && $_GET["focus"] == "nummer") ? 'autofocus' :'';?> value=<?=$nummer?>>
 				</li>
 				<li>
 					<p>Gemeente</p>
-					<input type="text" name="gemeente" value=<?=$gemeente?>>
+					<input type="text" name="gemeente" <?=(isset($_GET["focus"]) && $_GET["focus"] == "gemeente") ? 'autofocus' :'';?> value=<?=$gemeente?> >
 				</li>
 				<li>
 					<p>Postcode</p>
-					<input type="text" name="postcode" value=<?=$postcode?>>
+					<input type="text" name="postcode" <?=(isset($_GET["focus"]) && $_GET["focus"] == "postcode") ? 'autofocus' :'';?> value=<?=$postcode?> >
 				</li>
 			</ul>
 			<input type="submit" name="submit" value="Volgende">
