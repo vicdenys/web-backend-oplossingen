@@ -1,0 +1,17 @@
+<div id="body">
+	<h2>Nieuws</h2>
+	
+	<?php foreach($artikels as $key => $artikel): ?>
+	<article>
+		<h3><?= $artikel["title"]?></h3>
+		<p><?= $artikel["text"]?></p>
+		<p>Kernwoorden: 
+		<?php foreach($artikel["tags"] as $h):?>
+		 <?=$h?>
+		<?php endforeach ?>
+		</p>
+	</article>
+	<?php endforeach?>
+	
+</div>
+		

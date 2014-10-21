@@ -1,0 +1,53 @@
+body{
+	font-family: 'Helvetica Neue';
+	margin: 0;
+	
+}
+
+#header{
+	background-color: black;
+	color: white;
+}
+
+#header h2, #header ul{
+	display: inline-block;
+}
+
+#header h2{
+	margin-left: 10px;
+}
+
+#header li{
+	display: inline-block;
+	list-style: none;
+	margin: 5px;
+}
+
+#header a{
+	color: white;
+}
+
+#footer{
+	position: absolute;
+	bottom: 0;
+	background-color: #e2e2e2;
+	width: 100%;
+}
+
+#footer p{
+	text-align: center;
+	width: 100%;
+}
+
+article{
+	width: 300px;
+	background-color: #e5e5e5;
+	display: inline-block;
+	padding: 5px;
+	margin: 5px;
+}
+
+#body{
+	
+}
+
