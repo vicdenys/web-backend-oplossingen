@@ -6,17 +6,17 @@
 		public $hundred;
 		public $nominal;
 		
-		public function _construct($new, $unit){
-			$this->absolute = formatNumber($new/$unit);
-			$this->relative = formatNumber($absolute - 1);
-			$this->hundred = formatNumber($absolute * 100);
-			if($absolute > 1){$this->nominal = 'positive';}
-			else if($absolute == 1){$this->nominal = 'status-quo';}
-			else if($absolute < 1){$this->nominal = 'negative';}
+		public function __construct($new, $unit){
+			$this->absolute = $this->formatNumber($new/$unit);
+			$this->relative = $this->formatNumber($this->absolute - 1);
+			$this->hundred = $this->formatNumber($this->absolute * 100);
+			if($this->absolute > 1){$this->nominal = 'positive';}
+			else if($this->absolute == 1){$this->nominal = 'status-quo';}
+			else if($this->absolute < 1){$this->nominal = 'negative';}
 		}
 		
 		public function formatNumber($number){
-			return number_format($number,2,","," ");
+			return number_format($number,2,"."," ");
 		}
 	}
 	
