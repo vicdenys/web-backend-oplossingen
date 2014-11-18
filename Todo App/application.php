@@ -3,20 +3,77 @@
 		
 	$TakenBestaan = false;
 	
-	if(isset($_POST) && $_POST["beschrijving"] != "")
+	
+	/****************
+	*	Toevoegen	*
+	****************/
+	if(isset($_POST["beschrijving"]) && $_POST["beschrijving"] != "")
 	{	
-		($_SESSION["taken"]["nietAf"][] =  $_POST["beschrijving"]);	
+		$_SESSION["taken"]["toDo"][] = $_POST["beschrijving"];
+		$TakenBestaan = CheckTaken();
+		
+	}
+	if(isset($_POST["beschrijving"]) && $_POST["beschrijving"] == ""){
+		echo "<script type='text/javascript'>alert('Je moet wel iets invullen!');</script>";
+	}
+
+	/****************
+	*	Verwijder1	*
+	****************/
+	
+	if (isset($_POST["verwijderToDo"])){
+		unset($_SESSION["taken"]["toDo"][$_POST["verwijderToDo"]]);
+		$TakenBestaan = CheckTaken();
 	}
 	
-	if (isset($_SESSION["taken"]) && $_SESSION["taken"] != null){
-		$TakenBestaan = true;
+	/****************
+	*	Verwijder2	*
+	****************/
+	
+	if (isset($_POST["verwijderDone"])){
+		unset($_SESSION["taken"]["done"][$_POST["verwijderDone"]]);
+		$TakenBestaan = CheckTaken();
 	}
 	
-	if (isset($_POST["verwijder"])){
-		unset($_SESSION["taken"]["nietAf"][$_POST["verwijder"]]);
+	/********************
+	*	Taak naar ToDo	*
+	********************/
+	
+	if (isset($_POST["doneOn"])){
+		$_SESSION["taken"]["done"][] = $_SESSION["taken"]["toDo"][$_POST["doneOn"]];
+		unset($_SESSION["taken"]["toDo"][$_POST["doneOn"]]);
+		$TakenBestaan = CheckTaken();
 	}
 	
-	//var_dump($_SESSION);
+	/********************
+	*	Taak naar Done	*
+	********************/
+	
+	if (isset($_POST["doneOff"])){
+		$_SESSION["taken"]["toDo"][] = $_SESSION["taken"]["done"][$_POST["doneOff"]] ;
+		unset($_SESSION["taken"]["done"][$_POST["doneOff"]]);
+		$TakenBestaan = CheckTaken();
+	}
+	
+	/****************
+	*	Functies	*
+	*****************/
+	
+	function CheckTaken(){
+		if (isset($_SESSION["taken"]["toDo"]) && $_SESSION["taken"]["toDo"] != null){
+			return true;
+		}
+		else if (isset($_SESSION["taken"]["done"]) && $_SESSION["taken"]["done"] != null){
+			return true;
+		}
+	}
+	
+	
+
+	
+	$toDo= (isset($_SESSION["taken"]["toDo"])) ?$_SESSION["taken"]["toDo"] :"";
+	$done = (isset($_SESSION["taken"]["done"])) ?$_SESSION["taken"]["done"] :"";
+
 ?>
 
 <!DOCTYPE html>
@@ -32,21 +89,50 @@
 		<?php if($TakenBestaan): ?>
 		
 		
-			<h3>Nog te doen<h3>
-				<ul>
-					<?php foreach($_SESSION["taken"]["nietAf"] as $index => $taak): ?>
-					<li>
-						<form action="application.php" method="post">
-							<button title="Status wijzigen" name="toggleTodo" value="<?= $index?>" class="status not-done"><?= $taak?></button>
-							<button title="Verwijderen" name="verwijder" value="<?= $index?>">Verwijder</button>
-						</form>
-					</li>
-					<?php endforeach; ?>
-				</ul>
+			<h3>Nog te doen</h3>
+				<?php if($toDo != null): ?>
 				
+					<ul>
+						<?php foreach($toDo as $index => $taak): ?>
+						<li>
+							<form action="application.php" method="post">
+								<button title="Status wijzigen" name="doneOn" value="<?= $index?>" class="status not-done"><?= $taak?></button>
+								<button title="Verwijderen" name="verwijderToDo" value="<?= $index?>">Verwijder</button>
+							</form>
+						</li>
+						<?php endforeach; ?>
+					</ul>
+					
+				<?php else: ?>
+				
+					<p>Wééé! alles is gedaan! </p>
+					
+				<?php endif; ?>
 				
 			<h3>Done!</h3>
+				<?php if($done != null): ?>
+				
+					<ul>
+						<?php foreach($done as $index => $taak): ?>
+						<li>
+							<form action="application.php" method="post">
+								<button title="Status wijzigen" name="doneOff" value="<?= $index?>" class="status not-done"><?= $taak?></button>
+								<button title="Verwijderen" name="verwijderDone" value="<?= $index?>">Verwijder</button>
+							</form>
+						</li>
+						<?php endforeach; ?>
+					</ul>
+					
+				<?php else: ?>
+				
+					<p>Werk aan de winkel!</p>
+					
+				<?php endif; ?>
+				
+		<?php else: ?>
 		
+			<p>Je hebt nog geen taken toegevoegd! niks te doen ofwa?</p>
+				
 		<?php endif; ?>
 		
 		<h1>Todo Toevoegen</h1>
