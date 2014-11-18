@@ -3,7 +3,6 @@
 		
 	$TakenBestaan = false;
 	
-	
 	/****************
 	*	Toevoegen	*
 	****************/
@@ -15,6 +14,7 @@
 	}
 	if(isset($_POST["beschrijving"]) && $_POST["beschrijving"] == ""){
 		echo "<script type='text/javascript'>alert('Je moet wel iets invullen!');</script>";
+		$TakenBestaan = CheckTaken();
 	}
 
 	/****************
@@ -82,6 +82,8 @@
 		<title>Todo App</title>
 		<meta charset="utf-8"/>
 		
+		
+		<link rel="stylesheet" type="style/css" href="style.css"/>
 	</head>
 	<body>
 		<h1>Todo App</h1>
@@ -96,8 +98,8 @@
 						<?php foreach($toDo as $index => $taak): ?>
 						<li>
 							<form action="application.php" method="post">
-								<button title="Status wijzigen" name="doneOn" value="<?= $index?>" class="status not-done"><?= $taak?></button>
-								<button title="Verwijderen" name="verwijderToDo" value="<?= $index?>">Verwijder</button>
+								<button class="status Not" title="Status" name="doneOn" value="<?= $index?>" class="status not-done"><?= $taak?></button>
+								<button class="verwijder" title="Verwijderen" name="verwijderToDo" value="<?= $index?>">X</button>
 							</form>
 						</li>
 						<?php endforeach; ?>
@@ -116,8 +118,8 @@
 						<?php foreach($done as $index => $taak): ?>
 						<li>
 							<form action="application.php" method="post">
-								<button title="Status wijzigen" name="doneOff" value="<?= $index?>" class="status not-done"><?= $taak?></button>
-								<button title="Verwijderen" name="verwijderDone" value="<?= $index?>">Verwijder</button>
+								<button class="status Done" title="Status" name="doneOff" value="<?= $index?>" class="status not-done"><?= $taak?></button>
+								<button class="verwijder" title="Verwijderen" name="verwijderDone" value="<?= $index?>">X</button>
 							</form>
 						</li>
 						<?php endforeach; ?>
