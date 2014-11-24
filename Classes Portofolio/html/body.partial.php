@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Portofolio</title>
-		<meta charset="utf-8"/>
-		
-		<link rel="stylesheet" type="style/css" href="CSS/global.css"/>
-	</head>
-	<body>
-		<header>
-			<h3>Vic Denys</h3>
-			<ul>
-				<li>Contact</li>
-				<li>Gallerij</li>
-				<li>Werk</li>
-			</ul>
-		</header>
 		<div id="body">
+			<div id="main-content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+			<img src="img/_DSC0084-2.jpg"/> 
 			
 		</div>
-		<footer>
-			
-		</footer> 
-
-	</body>
-</html>
