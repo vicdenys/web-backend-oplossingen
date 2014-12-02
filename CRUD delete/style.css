@@ -1,3 +1,8 @@
+body{
+	font-family: "Helvetica";
+}
+
+
 th, td{
 	border: solid #c2c2c2 1px;
 	padding: 5px;
@@ -21,4 +26,17 @@ input{
 	background-color: transparent;
 	background-repeat: no-repeat;
 	color: transparent;
+}
+
+.delete{
+	background-color: #ffa0a0;
+	color: white;
+	padding: 10px;
+	margin-bottom: 30px;
+	border-radius: 5px;
+	width: 200px;
+}
+
+.rowToDelete{
+	background-color: #ffa0a0 !important;
 }

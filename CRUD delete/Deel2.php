@@ -1,10 +1,17 @@
 <?php
 	
 	$Message = "";
+	$vraagDelete = false;
+	$nrDelete = 0;
 	
 	try{
 	
 		$db = new PDO("mysql:host=localhost;dbname=bieren", "root", "");
+		
+		if(isset($_POST["confirm"])){
+			$nrDelete = $_POST["confirm"];
+			$vraagDelete = true;
+		}
 	
 		if(isset($_POST["delete"])){
 		
@@ -35,8 +42,6 @@
 		{
 			$fetched[]	=	$row;
 		}
-		
-		
 
 	}
 	
@@ -59,7 +64,18 @@
 		<h1>Overzicht van Bieren</h1>
 		
 		<h3><?= $Message?></h3>
-
+		
+		<?php if($vraagDelete): ?>
+		<form action="Deel2.php" method="post" class="delete" >
+		
+			<h4>Weet u het zeker?</h4>
+			<button type="submit" name="delete" value="<?= $nrDelete?>">JA</button>
+			<button type="submit">NEE</button>
+			
+		</form>
+		<?php endif; ?>
+		
+		
 		<table class="tabel">
 			<thead>
 					<tr>
@@ -75,15 +91,15 @@
 			</thead>
 			<tbody>
 				<?php foreach($fetched as $array):?>
-					<tr>
+					<tr class="<?= (isset($_POST["confirm"]) && $_POST["confirm"] == $array["brouwernr"])?  "rowToDelete" : "" ; ?>">
 						<?php foreach($array as $key):?>
 							<td>
 								<?php echo $key ?>
 							</td>
 						<?php endforeach;?>
 							<td>
-								<form action="Deel1.php" method="post">
-									<input type="submit" name="delete" value=<?= $array["brouwernr"]?>>
+								<form action="Deel2.php" method="post">
+									<input type="submit" name="confirm" value=<?= $array["brouwernr"]?>>
 								</form>
 							</td>
 					</tr>
