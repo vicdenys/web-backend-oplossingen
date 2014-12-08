@@ -63,7 +63,7 @@
 	<body>
 		<h1>Overzicht van Bieren</h1>
 		
-		<h3><?= $Message?></h3>
+		<h3 id="message"><?= $Message?></h3>
 		
 		<?php if($vraagDelete): ?>
 		<form action="Deel2.php" method="post" class="delete" >
