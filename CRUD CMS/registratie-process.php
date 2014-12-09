@@ -30,7 +30,7 @@
 	
 	
 		$_SESSION["registration"]["email"] = $_POST["email"];
-		$_SESSION["registration"]["password"] = $_POST["paswoord"];
+		$_SESSION["registration"]["password"] = $_POST["password"];
 		
 		$email = $_POST["email"];
 		$password = $_POST["paswoord"];
@@ -39,7 +39,7 @@
 			
 			try{
 			
-				$connection = new PDO("mysql:host=localhost;dbname=OEF_SECURITY", "root", "");
+				$connection = new PDO("mysql:host=localhost;dbname=OEF_CRUD_CMS", "root", "");
 				$db = new Database($connection);
 				$fetched = $db->query("SELECT * FROM users WHERE email = :email", array(":email" => $email));
 				

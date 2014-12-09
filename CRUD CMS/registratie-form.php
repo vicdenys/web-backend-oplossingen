@@ -10,7 +10,7 @@
 	
 	$password = false;
 	$email = false;
-	$errors = false;
+	$errors = array();
 	$isValid = false;
 	
 	
