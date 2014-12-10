@@ -1,6 +1,9 @@
 <?php
 	
+	session_start();
+	
 	$isauthenticated = false;
+	$message = false;
 	$_SESSION["registration"]["password"] = "";
 	$_SESSION["registration"]["email"] = "";
 	
@@ -36,6 +39,14 @@
 		
 	}
 	
+	if(isset($_SESSION["artikel"]["notification"])){
+		$message = $_SESSION["artikel"]["notification"];
+	}
+	
+	$_SESSION["artikel"]["notification"] = "";
+
+	
+	
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +75,17 @@
 		        margin-top: 40px;
 	        }
 	        
+	        #titel, #artikel, #kernwoorden, #datum{
+		        width: 400px;
+		        height: 30px;
+		        margin-top: 5px;
+		        margin-bottom: 10px;
+	        }
+	        
+	        #artikel{
+		        height: 60px;
+	        }
+	        
         </style>
 		
 	</head>
@@ -78,6 +100,8 @@
  			</header>
 		
 			<h1>Artikel Toevoegen</h1>
+			
+			<p><?= $message ?></p>
 			
 			<form action="artikel-toevoegen-proces.php" method="post">
 				

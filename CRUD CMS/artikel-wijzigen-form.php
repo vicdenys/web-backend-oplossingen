@@ -1,12 +1,10 @@
-<?php
-
+<?php 
+	
 	$message = false;
 
 	session_start();
 	
 	$isauthenticated = false;
-	$_SESSION["registration"]["password"] = "";
-	$_SESSION["registration"]["email"] = "";
 	
 	function __autoload($class) {
 		require_once($class . '.php');
@@ -41,8 +39,9 @@
 	}
 	
 	
-	$fetchedArtikels = $db->query("SELECT * FROM artikels");
+	$artikel = $db->query("SELECT * FROM artikels WHERE id = :id", array(":id" => $_GET["artikel"]));
 	
+	$artikel = $artikel["data"][0];
 	
 	if(isset($_SESSION["artikel"]["notification"])){
 		$message = $_SESSION["artikel"]["notification"];
@@ -50,6 +49,7 @@
 	
 	$_SESSION["artikel"]["notification"] = "";
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -67,20 +67,27 @@
 		        display: inline;
 	        }
 	        
-	        article{
-		        padding: 10px;
-		        margin-top: 5px; 
+	        #wijzigen{
+		        display: block;
+		        margin-top: 40px;
 	        }
 	        
-	        .notActive{
-		        background-color: #c5c5c5;
-		        border-radius: 5px;
+	        #titel, #artikel, #kernwoorden, #datum{
+		        width: 400px;
+		        height: 30px;
+		        margin-top: 5px;
+		        margin-bottom: 10px;
+	        }
+	        
+	        #artikel{
+		        height: 60px;
 	        }
 	        
         </style>
 		
 	</head>
 	<body>
+	
 		<?php if($isauthenticated): ?>
 		
 			<header>
@@ -89,42 +96,41 @@
 				<a href="logout.php">Uitloggen</a>
  			</header>
 		
-			<h1>Overzicht van Artikels</h1>
+			<h1>Artikel Wijzigen</h1>
 			
 			<p><?= $message ?></p>
 			
-			<a href="artikel-toevoegen-form.php">Voeg een artikel toe</a>
 			
-			<?php if($fetchedArtikels["data"]): ?>
-			
-				<?php foreach($fetchedArtikels["data"] as $artikel): ?>
+			<form action="artikel-wijzigen.php" method="post">
 				
-					<?php if($artikel["is_archived"] != 1): ?>
-					
-						<article class="<?= ($artikel["is_active"])? "" : "notActive" ; ?>">
-						
-							<h3><?= $artikel["titel"] ?></h3>
-							
-							<ul>
-								<li>Artikel: <?= $artikel["artikel"] ?></li>
-								<li>Kernwoorden: <?= $artikel["kernwoorden"] ?></li>
-								<li>Datum: <?= $artikel["datum"] ?></li>
-							</ul>
-							
-							<a href="artikel-wijzigen-form.php?artikel=<?= $artikel["id"] ?>">artikel wijzigen</a> | 
-							<a href="artikel-activeren.php?artikel=<?= $artikel["id"] ?>"><?= ($artikel["is_active"])? "artikel deactiveren" : "artikel activeren" ; ?></a> |
-							<a href="artikel-verwijderen.php?artikel=<?= $artikel["id"] ?>">artikel verwijderen</a>
-						</article>
-					
-					<?php endif; ?>
+				<label for="titel">Titel</label>
+				<input id="titel" name="titel" type="text" value="<?= $artikel["titel"] ?>"/>
 				
-				<?php endforeach; ?>
+				<label for="artikel">Artikel</label>
+				<textarea id="artikel" name="artikel" ><?= $artikel["artikel"] ?></textarea>
+				
+				<label for="kernwoorden">Kernwoorden</label>
+				<input id="kernwoorden" name="kernwoorden" type="text" value="<?= $artikel["kernwoorden"] ?>"/>
+				
+				<label for="datum">Datum (dd-mm-jjj)</label>
+				<input id="datum" name="datum" type="text" value="<?= $artikel["datum"] ?>"/>
+				
+				<input type="hidden" name="id" value="<?= $artikel["id"] ?>"/>
+				
+				<input type="submit" id="wijzigen" value="Wijzigen" name="wijzigen" />
+				
+			</form>
 			
-			<?php endif; ?>
-			
-		<?php endif; ?>	
+		<?php endif; ?>		
+
 	</body>
 </html>
+
+
+
+
+
+
 
 
 
